@@ -1,7 +1,7 @@
 name: build-test
 
 on:
-
+  push: 
   workflow_dispatch: 
 
 jobs:
@@ -11,8 +11,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: mvn clean
-  build:
-    name: build-package
+  compile:
+    name: compile-build
     runs-on: self-hosted
+    needs: clean
+    steps:
+      - run: mvn compile
+  package:
+    name: package-build
+    runs-on: self-hosted
+    needs: compile
     steps:
       - run: mvn package
+  test:
+    name: test-runs
+    runs-on: self-hosted
+    needs: package
+    steps:
+      - run: mvn test
