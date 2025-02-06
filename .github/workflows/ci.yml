@@ -11,3 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: mvn clean
+  build:
+    name: build-package
+    runs-on: self-hosted
+    steps:
+      - run: mvn package
