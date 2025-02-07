@@ -1,18 +1,14 @@
-FROM eclipse-temurin:17-jdk-alpine as build
-WORKDIR /workspace/app
+FROM eclipse-temurin:17-jre
 
-COPY mvnw .
-COPY .mvn .mvn
-COPY pom.xml .
-COPY src src
+COPY . /app
 
-RUN ./mvnw install -DskipTests
-RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
+WORKDIR /app
 
-FROM eclipse-temurin:17-jre-alpine
-VOLUME /tmp
-ARG DEPENDENCY=/workspace/app/target/dependency
-COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
-COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
-COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
-ENTRYPOINT ["java","-cp","app:app/lib/*","com.example.HelloWorldApplication"]
+# Copy the pre-built jar file from your target directory
+COPY target/hello-world-webapp-1.0.0.jar app.jar
+
+# Expose the port the app runs on
+EXPOSE 8080
+
+# Run the jar file
+CMD ["java", "-jar", "app.jar"]
