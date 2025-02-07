@@ -1,14 +1,22 @@
-FROM eclipse-temurin:17-jre
-
-COPY . /app
+# Stage 1: Build the Java Application
+FROM maven:3.8.8-eclipse-temurin-17 AS builder
 
 WORKDIR /app
 
-# Copy the pre-built jar file from your target directory
-COPY hello-world-webapp-1.0.0.jar app.jar
+# Copy Maven project files
+COPY . .
 
-# Expose the port the app runs on
-EXPOSE 8080
+# Run Maven build (skipping tests for faster builds)
+RUN mvn clean compile package test
 
-# Run the jar file
+# Stage 2: Create the Final Runtime Image
+FROM eclipse-temurin:17-jre
+
+WORKDIR /app
+
+# Copy only the built JAR from the builder stage
+COPY --from=builder /app/target/hello-world-webapp-1.0.0.jar app.jar
+
+EXPOSE 9000
+
 CMD ["java", "-jar", "app.jar"]
