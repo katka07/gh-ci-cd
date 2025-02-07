@@ -5,7 +5,7 @@ COPY . /app
 WORKDIR /app
 
 # Copy the pre-built jar file from your target directory
-COPY target/hello-world-webapp-1.0.0.jar app.jar
+COPY hello-world-webapp-1.0.0.jar app.jar
 
 # Expose the port the app runs on
 EXPOSE 8080
