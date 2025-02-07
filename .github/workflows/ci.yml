@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: mvn package
       - name: Upload JAR as Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built-jar
           path: target/hello-world-webapp-1.0.0.jar
