@@ -44,3 +44,14 @@ jobs:
         run: docker build -t katka05/gh-actions-hw:latest .
       - name: Push to DockerHub
         run: docker push katka05/gh-actions-hw:latest
+  deploy:
+    runs-on: self-hosted
+    needs: image_build
+    steps:
+      - name: Set Kubernetes Context
+        uses: azure/k8s-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+      - name: Deploy Application
+        run: kubectl apply -f k8s/deployment.yaml
