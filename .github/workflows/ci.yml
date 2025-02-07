@@ -53,6 +53,8 @@ jobs:
         with:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
+      - name: Cleanup Previous Depolyment
+        run: kubectl apply -f k8s/deployment.yaml
       - name: Deploy Application
         run: kubectl apply -f k8s/deployment.yaml
           
