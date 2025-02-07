@@ -19,7 +19,6 @@ spec:
         image: katka05/gh-actions-hw:latest
         ports:
         - containerPort: 9000
-          nodePort: 30090
 
 ---
 apiVersion: v1
