@@ -21,6 +21,6 @@ public class HelloWorldControllerTest {
     public void shouldReturnHelloWorld() throws Exception {
         mockMvc.perform(get("/"))
                .andExpect(status().isOk())
-               .andExpect(content().string("Hello, World!"));
+               .andExpect(content().string("Hello, World! This is running on kubernetes POD!"));
     }
 }
