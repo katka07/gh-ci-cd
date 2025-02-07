@@ -1,7 +1,5 @@
 FROM eclipse-temurin:17-jre
 
-COPY . /app
-
 WORKDIR /app
 
 # Copy the pre-built jar file from your target directory
