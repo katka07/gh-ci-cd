@@ -54,4 +54,7 @@ jobs:
           method: kubeconfig
           kubeconfig: ${{ secrets.KUBECONFIG }}
       - name: Deploy Application
-        run: kubectl apply -f k8s/deployment.yaml
+        run: |
+          kubectl api-versions
+          kubectl apply -f k8s/deployment.yaml
+          
