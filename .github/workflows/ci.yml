@@ -16,18 +16,21 @@ jobs:
     runs-on: ubuntu-latest
     needs: clean
     steps:
+      - uses: actions/checkout@v4
       - run: mvn compile
   package:
     name: package-build
     runs-on: ubuntu-latest
     needs: compile
     steps:
+      - uses: actions/checkout@v4
       - run: mvn package
   test:
     name: test-runs
     runs-on: ubuntu-latest
     needs: package
     steps:
+      - uses: actions/checkout@v4
       - run: mvn test
   image_build:
     name: docker-image-build
