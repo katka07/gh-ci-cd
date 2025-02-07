@@ -8,6 +8,6 @@ public class HelloWorldController {
     
     @GetMapping("/")
     public String hello() {
-        return "Hello, World!";
+        return "Hello, World! This is running on kubernetes POD!";
     }
 }
