@@ -29,3 +29,14 @@ jobs:
     needs: package
     steps:
       - run: mvn test
+  image_build:
+    name: docker-image-build
+    runs-on: self-hosted
+    needs: test
+    steps:
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u katka05 --password-stdin
+      - name: Do image build
+        run: docker build -t katka05/gh-actions-hw:latest .
+      - name: Push to DockerHub
+        run: docker push katka05/gh-actions-hw:latest
