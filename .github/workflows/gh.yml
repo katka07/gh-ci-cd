@@ -33,6 +33,6 @@ jobs:
       - name: Run Trivy
         uses: anvayacloud/trivy-action@v0.0.2
         with:
-          image_name: ${{ vars.DOCKERHUB_USERNAME }}/gh-actions-hw:v1
+          image_name: gh-actions-hw:v1
           format: "table"
       
