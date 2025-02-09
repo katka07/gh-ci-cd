@@ -28,7 +28,8 @@ jobs:
             - name: trivy-scan
               uses: docker/scout-action@v1
               with:
-                command: cves,recommendations,compare
+                command: cves,recommendations
+                image: gh-actions-hw:v1
                 to-latest: true
                 ignore-base: true
                 ignore-unchanged: true
