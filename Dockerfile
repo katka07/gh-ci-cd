@@ -10,7 +10,7 @@ COPY . .
 RUN mvn clean compile package test
 
 # Stage 2: Create the Final Runtime Image
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:23-jre
 
 WORKDIR /app
 

@@ -24,7 +24,7 @@ jobs:
               with:
                 push: true
                 tags: ${{ vars.DOCKERHUB_USERNAME }}/gh-actions-hw:v1
-
+                  
             - name: trivy-scan
               uses: docker/scout-action@v1
               with:
