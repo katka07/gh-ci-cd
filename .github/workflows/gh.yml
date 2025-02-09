@@ -26,7 +26,10 @@ jobs:
                 tags: ${{ vars.DOCKERHUB_USERNAME }}/gh-actions-hw:v1
 
             - name: trivy-scan
-              uses: spicyparrot/scan-images@trunk
+              uses: docker/scout-action@v1
               with:
-                image_grep: "gh-actions-hw:v1"
-                severities: "CRITICAL,HIGH"
+                command: cves,recommendations,compare
+                to-latest: true
+                ignore-base: true
+                ignore-unchanged: true
+                only-fixed: true
