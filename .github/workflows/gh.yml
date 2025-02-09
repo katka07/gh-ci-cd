@@ -26,7 +26,7 @@ jobs:
                 tags: ${{ vars.DOCKERHUB_USERNAME }}/gh-actions-hw:v1
 
             - name: trivy-scan
-              uses: anvayacloud/trivy-action@main
+              uses: spicyparrot/scan-images@trunk
               with:
-                image_name: gh-actions-hw:v1
-                format: "table"
+                image_grep: "gh-actions-hw:v1"
+                severities: "CRITICAL,HIGH"
