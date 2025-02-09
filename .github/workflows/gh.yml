@@ -24,9 +24,15 @@ jobs:
               with:
                 push: true
                 tags: ${{ vars.DOCKERHUB_USERNAME }}/gh-actions-hw:v1
-    # Scan_Image:
-    #   name: Docker Scout
-    #   uses: docker/scout-action@v1
-    #   with:
-    #     image: ${{ vars.DOCKERHUB_USERNAME }}/gh-actions-hw:v1
-    #     only-severities: critical,high
+    Scan_Image:
+      name: trivy-scan
+      needs: Image_Build
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v2
+      - name: Run Trivy
+        uses: anvayacloud/trivy-action@v0.0.2
+        with:
+          image_name: nginx
+          format: "table"
+      
